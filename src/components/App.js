@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
 import { View, ActivityIndicator, Text } from 'react-native';
 import firebase from 'firebase';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import reducers from './../redux';
 import LoginForm from './login/login';
 import { Spinner } from './common/Spinner';
 import Header from './header/header';
@@ -24,16 +28,15 @@ class App extends Component {
 
         this.setState({ loading: true });
         firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            this.setState({ loggedIn: true, loading: false });
-        } else {
-            this.setState({ loggedIn: false, loading: false });
-        }
-        });
+            if (user) {
+                this.setState({ loggedIn: true, loading: false });
+            } else {
+                this.setState({ loggedIn: false, loading: false });
+            }});
     };
 
     renderContent() {
-        console.log(this.state.loggedIn);
+        // console.log(this.state.loggedIn);
         const styles = {
             containerStyle: {},
             spinnerStyle: {
@@ -60,10 +63,12 @@ class App extends Component {
 
   render() {
     return (
-      <View>
-          <Header headerText={'albums'}/>
-          {(this.state.loading ? <ActivityIndicator size={'large'} /> : this.renderContent())}
-      </View>
+        <Provider store={createStore(reducers)}>
+            <View>
+                <Header headerText={'albums'}/>
+                {(this.state.loading ? <ActivityIndicator size={'large'} /> : this.renderContent())}
+            </View>
+        </Provider>
     );
   };
 }

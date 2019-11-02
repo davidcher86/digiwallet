@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 import { Button, Input, Icon  } from 'react-native-elements';
-// import { Icon } from 'react-native-vector-icons';
-// import { Input as Inp } from './../common/Input';
+import { connect } from 'react-redux';
+
 import { Spinner } from './../common/Spinner';
 import firebase from 'firebase';
 
@@ -61,6 +61,7 @@ class LoginForm extends Component {
     };
 
     render() {
+        console.log(this.props.login);
         const styles = {
             containerStyle: {},
             labelStyle: {},
@@ -93,4 +94,8 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+const mapStateToProps = state => {
+    return { login: state.login };
+};
+
+export default connect(mapStateToProps)(LoginForm);
