@@ -7,8 +7,6 @@ import { createStore } from 'redux';
 
 import reducers from './../redux';
 import LoginForm from './login/login';
-import { Spinner } from './common/Spinner';
-import Header from './header/header';
 import Router from './../Router';
 
 
@@ -64,7 +62,6 @@ class App extends Component {
 
   render() {
     const store = createStore(reducers, {});
-    console.log(store);
 
     const styles = {
         containerStyle: {},
@@ -77,12 +74,8 @@ class App extends Component {
     };
 
     return (
-        <Provider store={createStore(reducers)}>
+        <Provider store={store}>
             <Router titleStyle={styles.headerStyle} />
-            {/* <View>                
-                <Header headerText={'albums'}/>
-                {(this.state.loading ? <ActivityIndicator size={'large'} /> : this.renderContent())}
-            </View> */}
         </Provider>
     );
   };
