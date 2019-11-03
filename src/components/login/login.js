@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
 import { Button, Input, Icon  } from 'react-native-elements';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import { Spinner } from './../common/Spinner';
-import firebase from 'firebase';
+import * as actions from './loginActions';
+
 
 class LoginForm extends Component {
     state = {
@@ -61,7 +63,7 @@ class LoginForm extends Component {
     };
 
     render() {
-        console.log(this.props.login);
+        console.log(this.props);
         const styles = {
             containerStyle: {},
             labelStyle: {},
@@ -72,15 +74,19 @@ class LoginForm extends Component {
             <View style={styles.containerStyle}>
                 <Input
                     placeholder='user@gmail.com'
-                    value={this.state.username}
-                    onChangeText={text => this.setState({ username: text })}
+                    // value={this.state.username}
+                    // onChangeText={text => this.setState({ username: text })}
+                    value={this.props.login.username}
+                    onChangeText={text => this.props.changeUsername(text)}
                     leftIcon={{ name: 'mail' }}
                     errorStyle={{ color: 'red' }}
                     label='Email' />
                 <Input
                     placeholder='123456'
-                    value={this.state.password}
-                    onChangeText={text => this.setState({ password: text })}
+                    // value={this.state.password}
+                    // onChangeText={text => this.setState({ password: text })}
+                    value={this.props.login.password}
+                    onChangeText={text => this.props.changePassword(text)}
                     leftIcon={{ name: 'mail' }}
                     errorStyle={{ color: 'red' }}
                     errorMessage={this.state.error}
@@ -98,4 +104,4 @@ const mapStateToProps = state => {
     return { login: state.login };
 };
 
-export default connect(mapStateToProps)(LoginForm);
+export default connect(mapStateToProps, actions)(LoginForm);
