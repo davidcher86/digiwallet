@@ -1,4 +1,4 @@
-import {name as appName} from './../app.json';
+import {name as appName} from './../../../app.json';
 
 const initialState = {
     value: name

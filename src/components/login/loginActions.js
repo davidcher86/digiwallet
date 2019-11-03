@@ -25,3 +25,9 @@ export const handleError = (value) => {
         value
     };
 };
+
+export const resetForm = () => {
+    return {
+        type: 'RESET_FORM'
+    };
+};

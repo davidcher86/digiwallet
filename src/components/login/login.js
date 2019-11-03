@@ -4,28 +4,23 @@ import { Button, Input, Icon  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 
-import { Spinner } from './../common/Spinner';
 import * as actions from './loginActions';
 
 
 class LoginForm extends Component {
-    state = {
-        username: '',
-        password: '',
-        error: '',
-        loading: false
-    };
-
     onLoginPress() {
-        const { username, password } = this.state;
+        const { username, password } = this.props.login;
 
         this.setState({ loading: true, error: '' });
         firebase.auth().signInWithEmailAndPassword(username, password)
-            .then(() => this.setState({ error: '', loading: false, username: '', password: '', }))
-            .catch((res) =>  this.setState({ error: res.toString(), loading: false }));
+            .then(() => this.props.resetForm())
+            .catch((res) => {
+                this.props.resetForm();
+                this.props.handleError(res.toString());
+            });
     }
 
-    renderButton() {
+    renderButton(props) {
         const styles = {
             buttonContainerStyle: {
                 padding: 5,
@@ -42,7 +37,7 @@ class LoginForm extends Component {
         };
 
 
-        if (this.state.loading) {
+        if (props.login.loading) {
             return (
                 <View style={styles.buttonContainerStyle}>
                     <Button
@@ -63,9 +58,10 @@ class LoginForm extends Component {
     };
 
     render() {
-        console.log(this.props);
         const styles = {
-            containerStyle: {},
+            containerStyle: {
+                marginTop:  30,
+            },
             labelStyle: {},
             inputStyle: {}
         };
@@ -74,8 +70,6 @@ class LoginForm extends Component {
             <View style={styles.containerStyle}>
                 <Input
                     placeholder='user@gmail.com'
-                    // value={this.state.username}
-                    // onChangeText={text => this.setState({ username: text })}
                     value={this.props.login.username}
                     onChangeText={text => this.props.changeUsername(text)}
                     leftIcon={{ name: 'mail' }}
@@ -83,17 +77,15 @@ class LoginForm extends Component {
                     label='Email' />
                 <Input
                     placeholder='123456'
-                    // value={this.state.password}
-                    // onChangeText={text => this.setState({ password: text })}
                     value={this.props.login.password}
                     onChangeText={text => this.props.changePassword(text)}
                     leftIcon={{ name: 'mail' }}
                     errorStyle={{ color: 'red' }}
-                    errorMessage={this.state.error}
+                    errorMessage={this.props.login.error}
                     secureTextEntry={true}
                     label='Password' />
                 <View>
-                    {this.renderButton()}
+                    {this.renderButton(this.props)}
                 </View>
             </View>
         );
