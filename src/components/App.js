@@ -35,6 +35,7 @@ class App extends Component {
     };
 
     renderContent() {
+        // console.log(this.state.loggedIn);
         const styles = {
             containerStyle: {},
             spinnerStyle: {

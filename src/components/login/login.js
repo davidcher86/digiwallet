@@ -47,7 +47,8 @@ class LoginForm extends Component {
         return (
             <View style={styles.buttonContainerStyle}>
                 <TouchableOpacity style={styles.buttonContainer} 
-                                  onPress={this.onLoginPress.bind(this)}>
+                                //   onPress={this.onLoginPress.bind(this)}
+                                  onPress={this.props.onLoginPress(props.login.username, props.login.password)}>
                     <Text  style={styles.buttonStyle}>LOGIN</Text>
                 </TouchableOpacity>
                 {/* <Button

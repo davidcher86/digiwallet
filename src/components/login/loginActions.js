@@ -12,6 +12,17 @@ export const changePassword = (value) => {
     };
 };
 
+export const onLoginPress = (username, password) => 
+    dispatch => {
+        dispatch(changeLoading(true));
+        firebase.auth().signInWithEmailAndPassword(username, password)
+            .then(() => dispatch(resetForm())
+            .catch((res) => {
+                dispatch(resetForm());
+                dispatch(handleError(res.toString()));
+            }));
+    }
+
 export const changeLoading = (value) => {
     return {
         type: 'CHANGE_LOADING_STATE',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/login/login';
+import Dashboard from './components/dashboard/Dashboard';
 
 
 const RouterComponent = () => {
@@ -14,7 +15,8 @@ const RouterComponent = () => {
     return (
         <Router>
             <Scene key="root" titleStyle={styles.headerStyle}>
-                <Scene key="login" title="Login" component={LoginForm}/>
+                <Scene key="login" title="Login" component={LoginForm} initial/>
+                <Scene key="dashboard" title="dashboard" component={Dashboard} initial/>
             </Scene>
         </Router>
     );
