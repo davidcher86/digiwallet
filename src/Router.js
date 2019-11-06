@@ -1,7 +1,9 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import LoginForm from './components/login/login';
+import LoginForm from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import FinancialActionList from './components/financialActionList/FinancialActionList';
+import Account from './components/account/Account';
 
 
 const RouterComponent = () => {
@@ -15,8 +17,14 @@ const RouterComponent = () => {
     return (
         <Router>
             <Scene key="root" titleStyle={styles.headerStyle}>
-                <Scene key="login" title="Login" component={LoginForm} initial/>
-                <Scene key="dashboard" title="dashboard" component={Dashboard} initial/>
+                <Scene key="auth">
+                    <Scene key="login" title="Login" component={LoginForm} initial/>
+                </Scene>
+                <Scene key="main">
+                    <Scene key="dashboard" title="Dashboard" component={Dashboard} />
+                    <Scene key="account" title="Account" component={Account} />
+                    <Scene key="financialActionList" title="Financial Actions" component={FinancialActionList} />
+                </Scene>
             </Scene>
         </Router>
     );

@@ -9,10 +9,10 @@ import * as actions from './loginActions';
 
 class LoginForm extends Component {
     onLoginPress() {
-        const { username, password } = this.props.login;
+        const { email, password } = this.props.login;
 
         this.setState({ loading: true, error: '' });
-        firebase.auth().signInWithEmailAndPassword(username, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => this.props.resetForm())
             .catch((res) => {
                 this.props.resetForm();
@@ -46,9 +46,9 @@ class LoginForm extends Component {
 
         return (
             <View style={styles.buttonContainerStyle}>
-                <TouchableOpacity style={styles.buttonContainer} 
+                <TouchableOpacity style={styles.buttonContainer}
                                 //   onPress={this.onLoginPress.bind(this)}
-                                  onPress={this.props.onLoginPress(props.login.username, props.login.password)}>
+                                  onPress={this.props.onLoginPress(props.login.email, props.login.password)}>
                     <Text  style={styles.buttonStyle}>LOGIN</Text>
                 </TouchableOpacity>
                 {/* <Button
@@ -81,8 +81,9 @@ class LoginForm extends Component {
                     placeholder='user@gmail.com'
                     style={styles.inputStyle}
                     autoCorrect={false}
-                    value={this.props.login.username}
-                    onChangeText={text => this.props.changeUsername(text)}
+                    value={this.props.login.email}
+                    // onChangeText={text => this.props.changeUsername(text)}
+                    onChangeText={text => this.props.changeFieldValue('email', text)}
                     leftIcon={{ name: 'mail' }}
                     autoCapitalize="none"
                     errorStyle={{ color: 'red' }}
@@ -92,7 +93,8 @@ class LoginForm extends Component {
                     placeholder='123456'
                     style={styles.inputStyle}
                     value={this.props.login.password}
-                    onChangeText={text => this.props.changePassword(text)}
+                    // onChangeText={text => this.props.changePassword(text)}
+                    onChangeText={text => this.props.changeFieldValue('password', text)}
                     leftIcon={{ name: 'mail' }}
                     errorStyle={{ color: 'red' }}
                     errorMessage={this.props.login.error}

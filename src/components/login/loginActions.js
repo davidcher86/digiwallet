@@ -12,7 +12,15 @@ export const changePassword = (value) => {
     };
 };
 
-export const onLoginPress = (username, password) => 
+export const changeFieldValue = (field, value) => {
+    return {
+        type: 'UPDATE_LOGIN_FORM',
+        value,
+        field
+    };
+};
+
+export const onLoginPress = (username, password) =>
     dispatch => {
         dispatch(changeLoading(true));
         firebase.auth().signInWithEmailAndPassword(username, password)

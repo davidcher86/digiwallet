@@ -7,6 +7,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case 'UPDATE_LOGIN_FORM':
+            return Object.assign({}, state, { [action.field]: action.value });
         case 'CHANGE_USERNAME_FIELD':
             return Object.assign({}, state, { username: action.value });
         case 'CHANGE_PASSWORD_FIELD':
