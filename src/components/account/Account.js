@@ -13,7 +13,7 @@ class Account extends Component {
                 padding: 20
             }
         };
-
+        console.log(this.props);
         return(
             <View style={styles.containerStyle}>
                 <Text>{'CreateAccount'}</Text>

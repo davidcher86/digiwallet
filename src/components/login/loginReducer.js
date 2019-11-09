@@ -1,11 +1,24 @@
 const initialState = {
     username: '',
     password: '',
+    pageSettings: {
+        loading: false,
+        selectedTab: 'login' 
+    },
+    newPassword: '',
+    reEnteredPassword: '',
+    newEmail: '',
     loading: false,
-    error: ''
+    error: '',
+    validationErrors: {
+        newEmailError: '',
+        newPassError: '',
+        newReEnteredPassError: ''
+    }
 }
 
 export default (state = initialState, action) => {
+    let pageSettings = state.pageSettings;
     switch (action.type) {
         case 'UPDATE_LOGIN_FORM':
             return Object.assign({}, state, { [action.field]: action.value });
@@ -17,6 +30,9 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, { loading: action.value });
         case 'CHANGE_ERROR':
             return Object.assign({}, state, { error: action.value });
+        case 'CHANGE_TAB':
+            pageSettings.selectedTab = action.value;
+            return Object.assign({}, state, { pageSettings: pageSettings });
         case 'RESET_FORM':
             return Object.assign({}, state, { error: '', username: '', password: '', loading: false });
         default:

@@ -16,15 +16,15 @@ const RouterComponent = () => {
 
     return (
         <Router>
-            <Scene key="root" titleStyle={styles.headerStyle}>
-                <Scene key="auth">
+            <Scene key="root" titleStyle={styles.headerStyle} >
+                {/* <Scene key="auth"> */}
                     <Scene key="login" title="Login" component={LoginForm} initial/>
-                </Scene>
-                <Scene key="main">
-                    <Scene key="dashboard" title="Dashboard" component={Dashboard} />
+                {/* </Scene> */}
+                {/* <Scene key="main"> */}
+                    <Scene key="dashboard" title="dashboard" component={Dashboard} />
                     <Scene key="account" title="Account" component={Account} />
                     <Scene key="financialActionList" title="Financial Actions" component={FinancialActionList} />
-                </Scene>
+                {/* </Scene> */}
             </Scene>
         </Router>
     );

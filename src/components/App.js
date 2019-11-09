@@ -3,10 +3,11 @@ import { Button } from 'react-native-elements';
 import { View, ActivityIndicator, Text } from 'react-native';
 import firebase from 'firebase';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 
 import reducers from './../redux';
-import LoginForm from './login/login';
+import LoginForm from './login/Login';
 import Router from './../Router';
 
 
@@ -25,12 +26,13 @@ class App extends Component {
             measurementId: "G-B372DNG4CY"
         });
 
+        // var user = null;
         this.setState({ loading: true });
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                this.setState({ loggedIn: true, loading: false });
+                // this.setState({ loggedIn: true, loading: false });
             } else {
-                this.setState({ loggedIn: false, loading: false });
+                // this.setState({ loggedIn: false, loading: false });
             }});
     };
 
@@ -61,7 +63,7 @@ class App extends Component {
     }
 
   render() {
-    const store = createStore(reducers, {});
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     const styles = {
         containerStyle: {},

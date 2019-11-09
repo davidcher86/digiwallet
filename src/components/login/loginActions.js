@@ -1,3 +1,6 @@
+import { Actions, ActionConst } from 'react-native-router-flux';
+import firebase from 'firebase';
+
 export const changeUsername = (value) => {
     return {
         type: 'CHANGE_USERNAME_FIELD',
@@ -20,15 +23,39 @@ export const changeFieldValue = (field, value) => {
     };
 };
 
+export const onSignInPress = (username, password) =>
+    (dispatch) => {
+        Actions.account({ formType: 'new' });
+        // dispatch(changeLoading(true));        
+        // firebase.auth().createUserWithEmailAndPassword(username, password)
+        //     .then((r) => {
+        //         dispatch(resetForm());
+        //         Actions.account({ formType: 'new' });
+        //         return null;
+        //     })
+        //     .catch((res) => {
+        //         dispatch(resetForm());
+        //         dispatch(handleError(res.toString()));
+        //         return null;
+        //     });
+    }
+
 export const onLoginPress = (username, password) =>
-    dispatch => {
+    (dispatch) => {
         dispatch(changeLoading(true));
         firebase.auth().signInWithEmailAndPassword(username, password)
-            .then(() => dispatch(resetForm())
+            .then((r) => {
+                console.log(r)
+                dispatch(resetForm());
+                Actions.dashboard();
+                return null;
+            })
             .catch((res) => {
+                console.log(res)
                 dispatch(resetForm());
                 dispatch(handleError(res.toString()));
-            }));
+                return null;
+            });
     }
 
 export const changeLoading = (value) => {
@@ -48,5 +75,12 @@ export const handleError = (value) => {
 export const resetForm = () => {
     return {
         type: 'RESET_FORM'
+    };
+};
+
+export const changeTab = (value) => {
+    return {
+        type: 'CHANGE_TAB',
+        value
     };
 };
