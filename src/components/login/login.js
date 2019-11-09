@@ -89,6 +89,7 @@ class LoginForm extends Component {
         // console.log(this.props);
         const { login, pageSettings, validationErrors } = this.props;
         const { changeTab } = this.props;
+        
         return (
             <View style={styles.containerStyle}>
                 <View style={styles.tabContainerStyle}>

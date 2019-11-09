@@ -45,7 +45,7 @@ export const onLoginPress = (username, password) =>
         dispatch(changeLoading(true));
         firebase.auth().signInWithEmailAndPassword(username, password)
             .then((r) => {
-                console.log(r)
+                // console.log(r)
                 dispatch(resetForm());
                 Actions.dashboard();
                 return null;

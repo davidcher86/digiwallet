@@ -1,12 +1,24 @@
 const initialState = {
+    user: { 
+        firstName: '',
+        lastName: ''
+    },
+    // pageSettings: {},
     credit: 0,
-    curentAmount: 0
+    curentAmount: 0,
+    validationErrors: {
+        firstNameError: '',
+        lastNameError: ''
+    },
+    pageSettings: {
+        step: 1
+    }
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        // case 'CHANGE_USERNAME_FIELD':
-        //     return Object.assign({}, state, { username: action.value });
+        case 'UPDATE_ACCOUNT_FORM':
+            return Object.assign({}, state, { username: action.value });
         // case 'CHANGE_PASSWORD_FIELD':
         //     return Object.assign({}, state, { password: action.value });
         // case 'CHANGE_LOADING_STATE':

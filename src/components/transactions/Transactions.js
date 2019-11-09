@@ -4,7 +4,7 @@ import { Button, Input, Icon  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 
-import * as actions from './financialActionListActions';
+import * as actions from './transactionsActions';
 
 class FinancialActionList extends Component {
     render() {

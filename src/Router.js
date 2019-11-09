@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import FinancialActionList from './components/financialActionList/FinancialActionList';
+import FinancialActionList from './components/transactions/Transactions';
 import Account from './components/account/Account';
 
 
