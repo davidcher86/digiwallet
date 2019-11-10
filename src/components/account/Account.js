@@ -4,6 +4,7 @@ import { Button, Input, Icon  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import DatePicker from 'react-native-datepicker'
 
 import * as actions from './accountActions';
 
@@ -87,6 +88,29 @@ class Account extends Component {
                         <Picker.Item label="Male" value="male" />
                         <Picker.Item label="Female" value="female" />
                     </Picker>
+                    <DatePicker
+                        style={{width: 200}}
+                        date={user.birthDate}
+                        mode="date"
+                        placeholder="select date"
+                        format="YYYY-MM-DD"
+                        minDate="1916-05-01"
+                        maxDate="2019-06-01"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                        dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0
+                        },
+                        dateInput: {
+                            marginLeft: 36
+                        }
+                        }}
+                        onDateChange={(date) => {this.setState({date: date})}}
+                    />
                 </View>}
                 {pageSettings.step === 2 && <View style={{flex: 1}}>
                     <View>

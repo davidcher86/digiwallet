@@ -2,7 +2,8 @@ const initialState = {
     user: {
         firstName: '',
         lastName: '',
-        gender: 'male'
+        gender: 'male',
+        birthDate: '2016-05-01'
     },
     amount: 0,
     creditCard: {
