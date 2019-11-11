@@ -1,4 +1,6 @@
 
+import firebase from 'firebase';
+
 export const changeAccountFieldValue = (field, value) => {
     return {
         type: 'UPDATE_ACCOUNT_FORM_ACCOUNT',
@@ -55,11 +57,30 @@ export const handlePickerChange = (itemValue, itemIndex) => {
     };
 };
 
-export const handleRegisterAccount = (account) => {
-    console.log(account);
-    // console.log(itemIndex);
-    // return {
-    //     type: 'UPDATE_ACCOUNT_FORM',
-    //     value
-    // };
-};
+export const handleRegisterAccount = (account) =>
+    (dispatch) => {
+        console.log(account);
+        const { currentUser } = firebase.auth();
+        firebase.database().ref(`/users/${currentUser.uid}/account`)
+            .push(account)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
+
+export const handleEditAccount = (account) =>
+    (dispatch) => {
+        console.log(account);
+        const { currentUser } = firebase.auth();
+        firebase.database().ref(`/users/${currentUser.uid}/account/${account.uid}`)
+            .set(account)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };

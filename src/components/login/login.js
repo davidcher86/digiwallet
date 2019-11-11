@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { Button, Input, Icon  } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import firebase from 'firebase';
 
 import * as loginActions from './loginActions';
 
@@ -89,11 +90,11 @@ class LoginForm extends Component {
         // console.log(this.props);
         const { login, pageSettings, validationErrors } = this.props;
         const { changeTab } = this.props;
-        
+
         return (
             <View style={styles.containerStyle}>
                 <View style={styles.tabContainerStyle}>
-                    <Text 
+                    <Text
                         onPress={() => changeTab('login')}
                         style={[styles.tabStyle, (pageSettings.selectedTab === 'login' ? styles.selectedTabStyle : {})]}>
                             Login
@@ -102,7 +103,7 @@ class LoginForm extends Component {
                         onPress={() => changeTab('signIn')}
                         style={[styles.tabStyle, (pageSettings.selectedTab === 'signIn' ? styles.selectedTabStyle : {})]}>
                             Sign In
-                    </Text>        
+                    </Text>
                 </View>
                 {pageSettings.selectedTab === 'login' && <View style={styles.loginContainerStyle}>
                     <Input
@@ -175,7 +176,7 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return { 
+    return {
         login: state.login,
         pageSettings: state.login.pageSettings,
         validationErrors: state.login.validationErrors
